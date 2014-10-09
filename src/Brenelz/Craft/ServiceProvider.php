@@ -17,10 +17,9 @@ class ServiceProvider extends BaseServiceProvider {
 	public function boot()
 	{
 		$this->package('brenelz/craft');
-
 		
-		$this->app->missing(function(Exception $e) { $this->runCraft(); });
-		$this->app->error(function(MethodNotAllowedHttpException $e){ $this->runCraft(); });
+		$this->app->missing(function(Exception $e) { $this->app->make('Brenelz\Craft\Service')->run(); });
+		$this->app->error(function(MethodNotAllowedHttpException $e){ $this->app->make('Brenelz\Craft\Service')->run(); });
 
 		AliasLoader::getInstance()->alias('Craft','Brenelz\Craft\Facade');
 	}
@@ -32,7 +31,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bindShared('craft', function($app){
+		$this->app->bindShared('Brenelz\Craft\Service', function($app){
 			
 			$path = $app['config']->get('craft::craft.path');
 
@@ -46,15 +45,11 @@ class ServiceProvider extends BaseServiceProvider {
 		});
 	}
 
-	private function runCraft() {
-		$craft = $this->app->make('craft');
-		$craft->run();
-	}
-
 	public function provides()
 	{
 		return array(
-			'Craft\WebApp'
+			'Craft\WebApp',
+			'Brenelz\Craft\Service',
 		);
 	}
 

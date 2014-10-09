@@ -1,6 +1,6 @@
 <?php namespace Brenelz\Craft;
 
-use Illuminate\Foundation\Application as App;
+use Brenelz\Craft\Service as Craft;
 
 class BaseEntry  {
 	protected $craft;
@@ -8,8 +8,8 @@ class BaseEntry  {
 	protected $criteriaAdaptor;
 	protected $type = 'Entry';
 
-	public function __construct(App $app) {
-		$this->craft = $app->make('craft');
+	public function __construct(Craft $craft) {
+		$this->craft = $craft;
 		$this->criteria = $this->craft->elements->getCriteria($this->type);
 		$this->criteria->section = $this->section;
 
