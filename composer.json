@@ -1,0 +1,20 @@
+{
+    "name": "brenelz/craft",
+    "description": "",
+    "authors": [
+        {
+            "name": "Brenley Dueck",
+            "email": "brenelz@brenelz.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Brenelz\\Craft": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
